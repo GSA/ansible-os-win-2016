@@ -1,0 +1,85 @@
+##########################
+##########################
+## CIS LEVEL 1 SETTINGS ##
+##########################
+##########################
+
+   - name: "1.1.1,CCE-37166-6 | Ensure 'Enforce password history' is set to '24 or more password(s)'"
+     win_security_policy:
+        section: System Access
+        key: PasswordHistorySize
+        value: 24
+     tags:
+         - rule_1.1.1
+
+   - name: "1.1.2,CCE-37167-4 | Ensure 'Maximum password age' is set to '60 or fewer days, but not 0' [GSA-90]"
+     win_security_policy:
+        section: System Access
+        key: MaximumPasswordAge
+        value: 90
+     tags:
+         - rule_1.1.2
+
+   - name: "1.1.3,CCE-37073-4 | Ensure 'Minimum password age' is set to '1 or more day(s)' [GSA-0]"
+     win_security_policy:
+        section: System Access
+        key: MinimumPasswordAge
+        value: 0
+     tags:
+         - rule_1.1.3
+
+     #Local Security Policy limited to 14 chars at most for 'Minimum password length'; 16 chars (GSA Policy) implemented via Default Domain Policy Attribute for domain-joined nodes
+   - name: "1.1.4,CCE-36534-6 | Ensure 'Minimum password length' is set to '14 or more character(s)' [GSA-16]"
+     win_security_policy:
+        section: System Access
+        key: MinimumPasswordLength
+        value: 14 #16
+     tags:
+         - rule_1.1.4
+
+     #CIS-CAT unable to audit this control for non-domain-joined nodes
+   - name: "1.1.5,CCE-37063-5 | Ensure 'Password must meet complexity requirements' is set to 'Enabled' [GSA-Disabled]"
+     win_security_policy:
+        section: System Access
+        key: PasswordComplexity
+        value: 0
+     tags:
+         - rule_1.1.5
+
+     #CIS-CAT unable to audit this control for non-domain-joined nodes
+   - name: "1.1.6,CCE-36286-3 | Ensure 'Store passwords using reversible encryption' is set to 'Disabled'"
+     win_security_policy:
+        section: System Access
+        key: ClearTextPassword
+        value: 0
+     tags:
+         - rule_1.1.6
+
+     #This rule must be applied first to make rule_1.2.1 and rule_1.2.3 applicable
+   - name: "1.2.2,CCE-36008-1 | Ensure 'Account lockout threshold' is set to '10 or fewer invalid logon attempt(s), but not 0' [GSA-5]"
+     win_security_policy:
+        section: System Access
+        key: LockoutBadCount
+        value: 5
+     tags:
+         - rule_1.2.2
+
+   - name: "1.2.1,CCE-37034-6 | Ensure 'Account lockout duration' is set to '15 or more minute(s)' [GSA-30]"
+     win_security_policy:
+        section: System Access
+        key: LockoutDuration
+        value: 1800
+     tags:
+         - rule_1.2.1
+
+   - name: "1.2.3,CCE-36883-7 | Ensure 'Reset account lockout counter after' is set to '15 or more minute(s)' [GSA-30]"
+     win_security_policy:
+        section: System Access
+        key: ResetLockoutCount
+        value: 1800
+     tags:
+         - rule_1.2.3
+
+#########
+## EOF ##
+#########

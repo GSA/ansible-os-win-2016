@@ -1,0 +1,760 @@
+##########################
+##########################
+## CIS LEVEL 1 SETTINGS ##
+##########################
+##########################
+
+   - name: "2.2.1,CCE-37056-9 | Ensure 'Access Credential Manager as a trusted caller' is set to 'No One'"
+     win_user_right:
+        name: SeTrustedCredManAccessPrivilege
+        users:
+        action: set
+
+   - name: "2.2.2,CCE-35818-4 | Configure 'Access this computer from the network'"
+     win_user_right:
+        name: SeNetworkLogonRight
+        users:
+        - Administrators
+        - Authenticated Users
+        action: set
+
+   - name: "2.2.3,CCE-36876-1 | Ensure 'Act as part of the operating system' is set to 'No One'"
+     win_user_right:
+        name: SeTcbPrivilege
+        users:
+        action: set
+
+   - name: "2.2.5,CCE-37071-8 | Ensure 'Adjust memory quotas for a process' is set to 'Administrators, LOCAL SERVICE, NETWORK SERVICE'"
+     win_user_right:
+        name: SeIncreaseQuotaPrivilege
+        users:
+        - Administrators
+        - Local Service
+        - Network Service
+        action: set
+
+   - name: "2.2.6,CCE-37659-0 | Configure 'Allow log on locally'"
+     win_user_right:
+        name: SeInteractiveLogonRight
+        users:
+        - Administrators
+        action: set
+
+   - name: "2.2.7,CCE-37072-6 | Configure 'Allow log on through Remote Desktop Services'"
+     win_user_right:
+        name: SeRemoteInteractiveLogonRight
+        users:
+        - Administrators
+        - Remote Desktop Users
+        action: set
+
+   - name: "2.2.8,CCE-35912-5 | Ensure 'Back up files and directories' is set to 'Administrators'"
+     win_user_right:
+        name: SeBackupPrivilege
+        users:
+        - Administrators
+        action: set
+
+   - name: "2.2.9,CCE-37452-0 | Ensure 'Change the system time' is set to 'Administrators, LOCAL SERVICE'"
+     win_user_right:
+        name: SeSystemTimePrivilege
+        users:
+        - Administrators
+        - Local Service
+        action: set
+
+   - name: "2.2.10,CCE-37700-2 | Ensure 'Change the time zone' is set to 'Administrators, LOCAL SERVICE'"
+     win_user_right:
+        name: SeTimeZonePrivilege
+        users:
+        - Administrators
+        - Local Service
+        action: set
+
+   - name: "2.2.11,CCE-35821-8 | Ensure 'Create a pagefile' is set to 'Administrators'"
+     win_user_right:
+        name: SeCreatePagefilePrivilege
+        users:
+        - Administrators
+        action: set
+
+   - name: "2.2.12,CCE-36861-3 | Ensure 'Create a token object' is set to 'No One'"
+     win_user_right:
+        name: SeCreateTokenPrivilege
+        users:
+        action: set
+
+   - name: "2.2.13,CCE-37453-8 | Ensure 'Create global objects' is set to 'Administrators, LOCAL SERVICE, NETWORK SERVICE, SERVICE'"
+     win_user_right:
+        name: SeCreateGlobalPrivilege
+        users:
+        - Administrators
+        - Local Service
+        - Network Service
+        - Service
+        action: set
+
+   - name: "2.2.14,CCE-36532-0 | Ensure 'Create permanent shared objects' is set to 'No One'"
+     win_user_right:
+        name: SeCreatePermanentPrivilege
+        users:
+        action: set
+
+   - name: "2.2.15,CCE-35823-4 | Configure 'Create symbolic links'"
+     win_user_right:
+        name: SeCreateSymbolicLinkPrivilege
+        users:
+        - Administrators
+        action: set
+
+   - name: "2.2.16,CCE-37075-9 | Ensure 'Debug programs' is set to 'Administrators'"
+     win_user_right:
+        name: SeDebugPrivilege
+        users:
+        - Administrators
+        action: set
+
+     #Limiting hardening to only include the Guests group, since Local Account access will still be needed for non-domain-joined nodes
+   - name: "2.2.17,CCE-37954-5 | Configure 'Deny access to this computer from the network' [GSA-Guests, Local account]"
+     win_user_right:
+        name: SeDenyNetworkLogonRight
+        users:
+        - Guests
+        #- Local Account
+        action: set
+
+   - name: "2.2.18,CCE-36923-1 | Ensure 'Deny log on as a batch job' to include 'Guests'"
+     win_user_right:
+        name: SeDenyBatchLogonRight
+        users:
+        - Guests
+        action: set
+
+   - name: "2.2.19,CCE-36877-9 | Ensure 'Deny log on as a service' to include 'Guests'"
+     win_user_right:
+        name: SeDenyServiceLogonRight
+        users:
+        - Guests
+        action: set
+
+   - name: "2.2.20,CCE-37146-8 | Ensure 'Deny log on locally' to include 'Guests'"
+     win_user_right:
+        name: SeDenyInteractiveLogonRight
+        users:
+        - Guests
+        action: set
+
+     #Limiting hardening to only include the Guests group, since Local Account access will still be needed for non-domain-joined nodes
+   - name: "2.2.21,CCE-36867-0 | Ensure 'Deny log on through Remote Desktop Services' to include 'Guests, Local account'"
+     win_user_right:
+        name: SeDenyRemoteInteractiveLogonRight
+        users:
+        - Guests
+        #- Local Account
+        action: set
+
+   - name: "2.2.22,CCE-36860-5 | Configure 'Enable computer and user accounts to be trusted for delegation'"
+     win_user_right:
+        name: SeEnableDelegationPrivilege
+        users:
+        action: set
+
+   - name: "2.2.23,CCE-37877-8 | Ensure 'Force shutdown from a remote system' is set to 'Administrators'"
+     win_user_right:
+        name: SeRemoteShutdownPrivilege
+        users:
+        - Administrators
+        action: set
+
+   - name: "2.2.24,CCE-37639-2 | Ensure 'Generate security audits' is set to 'LOCAL SERVICE, NETWORK SERVICE'"
+     win_user_right:
+        name: SeAuditPrivilege
+        users:
+        - Local Service
+        - Network Service
+        action: set
+
+   - name: "2.2.25,CCE-37106-2 | Configure 'Impersonate a client after authentication'"
+     win_user_right:
+        name: SeImpersonatePrivilege
+        users:
+        - Administrators
+        - IIS_IUSRS
+        - Local Service
+        - Network Service
+        - Service
+        action: set
+
+   - name: "2.2.26,CCE-38326-5 | Ensure 'Increase scheduling priority' is set to 'Administrators'"
+     win_user_right:
+        name: SeIncreaseBasePriorityPrivilege
+        users:
+        - Administrators
+        action: set
+
+   - name: "2.2.27,CCE-36318-4 | Ensure 'Load and unload device drivers' is set to 'Administrators'"
+     win_user_right:
+        name: SeLoadDriverPrivilege
+        users:
+        - Administrators
+        action: set
+
+   - name: "2.2.28,CCE-36495-0 | Ensure 'Lock pages in memory' is set to 'No One'"
+     win_user_right:
+        name: SeLockMemoryPrivilege
+        users:
+        action: set
+
+   - name: "2.2.30,CCE-35906-7 | Configure 'Manage auditing and security log'"
+     win_user_right:
+        name: SeSecurityPrivilege
+        users:
+        - Administrators
+        action: set
+
+   - name: "2.2.31,CCE-36054-5 | Ensure 'Modify an object label' is set to 'No One'"
+     win_user_right:
+        name: SeReLabelPrivilege
+        users:
+        action: set
+
+   - name: "2.2.32,CCE-38113-7 | Ensure 'Modify firmware environment values' is set to 'Administrators'"
+     win_user_right:
+        name: SeSystemEnvironmentPrivilege
+        users:
+        - Administrators
+        action: set
+
+   - name: "2.2.33,CCE-36143-6 | Ensure 'Perform volume maintenance tasks' is set to 'Administrators'"
+     win_user_right:
+        name: SeManageVolumePrivilege
+        users:
+        - Administrators
+        action: set
+
+   - name: "2.2.34,CCE-37131-0 | Ensure 'Profile single process' is set to 'Administrators'"
+     win_user_right:
+        name: SeProfileSingleProcessPrivilege
+        users:
+        - Administrators
+        action: set
+
+   - name: "2.2.35,CCE-36052-9 | Ensure 'Profile system performance' is set to 'Administrators, NT SERVICE\\WdiServiceHost'"
+     win_user_right:
+        name: SeSystemProfilePrivilege
+        users:
+        - Administrators
+        - NT SERVICE\WdiServiceHost
+        action: set
+
+   - name: "2.2.36,CCE-37430-6 | Ensure 'Replace a process level token' is set to 'LOCAL SERVICE, NETWORK SERVICE'"
+     win_user_right:
+        name: SeAssignPrimaryTokenPrivilege
+        users:
+        - LOCAL SERVICE
+        - NETWORK SERVICE
+        action: set
+
+   - name: "2.2.37,CCE-37613-7 | Ensure 'Restore files and directories' is set to 'Administrators'"
+     win_user_right:
+        name: SeRestorePrivilege
+        users:
+        - Administrators
+        action: set
+
+   - name: "2.2.38,CCE-38328-1 | Ensure 'Shut down the system' is set to 'Administrators'"
+     win_user_right:
+        name: SeShutdownPrivilege
+        users:
+        - Administrators
+        action: set
+
+   - name: "2.2.40,CCE-38325-7 | Ensure 'Take ownership of files or other objects' is set to 'Administrators'"
+     win_user_right:
+        name: SeTakeOwnershipPrivilege
+        users:
+        - Administrators
+        action: set
+
+##########################
+##                      ##
+##########################
+
+   - name: "2.3.1.1,CCE-37953-7 | Ensure 'Accounts -  Administrator account status' is set to 'Disabled'"
+     win_security_policy:
+        section: System Access
+        key: EnableAdminAccount
+        value: 0
+
+   - name: "2.3.1.2,CCE-36147-7 | Ensure 'Accounts - Block Microsoft accounts' is set to 'Users can't add or log on with Microsoft accounts'"
+     win_regedit:
+        path: HKLM:\Software\Microsoft\Windows\Currentversion\Policies\System
+        name: "NoConnectedUser"
+        data: "3"
+        type: dword
+
+   - name: "2.3.1.3,CCE-37432-2 | Ensure 'Accounts - Guest account status' is set to 'Disabled'"
+     win_security_policy:
+        section: System Access
+        key: EnableGuestAccount
+        value: 0
+
+   - name: "2.3.1.4,CCE-37615-2 | Ensure 'Accounts - Limit local account use of blank passwords to console logon only' is set to 'Enabled'"
+     win_regedit:
+        path: HKLM:\System\Currentcontrolset\Control\Lsa
+        name: "LimitBlankPasswordUse"
+        data: "1"
+        type: dword
+
+   - name: "2.3.1.5,CCE-38233-3 | Configure 'Accounts - Rename administrator account'"
+     win_security_policy:
+        section: System Access
+        key: NewAdministratorName
+        value: GeorgeSharp
+
+   - name: "2.3.1.6,CCE-38027-9 | Configure 'Accounts - Rename guest account'"
+     win_security_policy:
+        section: System Access
+        key: NewGuestName
+        value: BobCooper
+
+   - name: "2.3.2.1,CCE-37850-5 | Ensure 'Audit - Force audit policy subcategory settings to override audit policy category settings' is set to 'Enabled'"
+     win_regedit:
+        path: HKLM:\System\Currentcontrolset\Control\Lsa
+        name: "SCENoApplyLegacyAuditPolicy"
+        data: "1"
+        type: dword
+
+   - name: "2.3.2.2,CCE-35907-5 | Ensure 'Audit - Shut down system immediately if unable to log security audits' is set to 'Disabled'"
+     win_regedit:
+        path: HKLM:\System\Currentcontrolset\Control\Lsa
+        name: "CrashOnAuditFail"
+        data: "0"
+        type: dword
+
+   - name: "2.3.4.1,CCE-37701-0 | Ensure 'Devices - Allowed to format and eject removable media' is set to 'Administrators'"
+     win_regedit:
+        path: HKLM:\Software\Microsoft\Windows Nt\Currentversion\Winlogon
+        name: "AllocateDASD"
+        data: "0"
+        type: string
+
+   - name: "2.3.4.2,CCE-37942-0 | Ensure 'Devices - Prevent users from installing printer drivers' is set to 'Enabled'"
+     win_regedit:
+        path: HKLM:\System\Currentcontrolset\Control\Print\Providers\Lanman Print Services\Servers
+        name: "AddPrinterDrivers"
+        data: "1"
+        type: dword
+
+   - name: "2.3.6.1,CCE-36142-8 | Ensure 'Domain member - Digitally encrypt or sign secure channel data (always)' is set to 'Enabled'"
+     win_regedit:
+        path: HKLM:\System\Currentcontrolset\Services\Netlogon\Parameters
+        name: "RequireSignOrSeal"
+        data: "1"
+        type: dword
+
+   - name: "2.3.6.2,CCE-37130-2 | Ensure 'Domain member - Digitally encrypt secure channel data (when possible)' is set to 'Enabled'"
+     win_regedit:
+        path: HKLM:\System\Currentcontrolset\Services\Netlogon\Parameters
+        name: "sealsecurechannel"
+        data: "1"
+        type: dword
+
+   - name: "2.3.6.3,CCE-37222-7 | Ensure 'Domain member - Digitally sign secure channel data (when possible)' is set to 'Enabled'"
+     win_regedit:
+        path: HKLM:\System\Currentcontrolset\Services\Netlogon\Parameters
+        name: "signsecurechannel"
+        data: "1"
+        type: dword
+
+   - name: "2.3.6.4,CCE-37508-9 | Ensure 'Domain member - Disable machine account password changes' is set to 'Disabled'"
+     win_regedit:
+        path: HKLM:\System\Currentcontrolset\Services\Netlogon\Parameters
+        name: "disablepasswordchange"
+        data: "0"
+        type: dword
+
+   - name: "2.3.6.5,CCE-37431-4 | Ensure 'Domain member - Maximum machine account password age' is set to '30 or fewer days, but not 0'"
+     win_regedit:
+        path: HKLM:\System\Currentcontrolset\Services\Netlogon\Parameters
+        name: "MaximumPasswordAge"
+        data: "30"
+        type: dword
+
+   - name: "2.3.6.6,CCE-37614-5 | Ensure 'Domain member - Require strong (Windows 2000 or later) session key' is set to 'Enabled'"
+     win_regedit:
+        path: HKLM:\System\Currentcontrolset\Services\Netlogon\Parameters
+        name: "RequireStrongKey"
+        data: "1"
+        type: dword
+
+   - name: "2.3.7.1,CCE-36056-0 | Ensure 'Interactive logon - Do not display last user name' is set to 'Enabled'"
+     win_regedit:
+        path: HKLM:\Software\Microsoft\Windows\Currentversion\Policies\System
+        name: "DontDisplayLastUserName"
+        data: "1"
+        type: dword
+
+   - name: "2.3.7.2,CCE-37637-6 | Ensure 'Interactive logon - Do not require CTRL+ALT+DEL' is set to 'Disabled'"
+     win_regedit:
+        path: HKLM:\Software\Microsoft\Windows\Currentversion\Policies\System
+        name: "DisableCAD"
+        data: "0"
+        type: dword
+
+   - name: "2.3.7.3,CCE-38235-8 | Ensure 'Interactive logon - Machine inactivity limit' is set to '900 or fewer second(s), but not 0'"
+     win_regedit:
+        path: HKLM:\Software\Microsoft\Windows\Currentversion\Policies\System
+        name: "InactivityTimeoutSecs"
+        data: "900"
+        type: dword
+
+   - name: "2.3.7.4,CCE-37226-8 | Configure 'Interactive logon - Message text for users attempting to log on'"
+     win_regedit:
+        path: HKLM:\Software\Microsoft\Windows\Currentversion\Policies\System
+        name: "LegalNoticeText"
+        data: "This is a U.S. General Services Administration Federal Government computer system that is FOR OFFICIAL USE ONLY. This system is subject to monitoring. Therefore, no expectation of privacy is to be assumed. Individuals found performing unauthorized activities are subject to disciplinary action including criminal prosecution."
+        type: string
+
+   - name: "2.3.7.5,CCE-37512-1 | Configure 'Interactive logon - Message title for users attempting to log on'"
+     win_regedit:
+        path: HKLM:\Software\Microsoft\Windows\Currentversion\Policies\System
+        name: "LegalNoticeCaption"
+        data: "IT SECURITY WARNING"
+        type: string
+
+   - name: "2.3.7.7,CCE-37622-8 | Ensure 'Interactive logon - Prompt user to change password before expiration' is set to 'between 5 and 14 days'"
+     win_regedit:
+        path: HKLM:\Software\Microsoft\Windows Nt\Currentversion\Winlogon
+        name: "PasswordExpiryWarning"
+        data: "14"
+        type: dword
+
+   - name: "2.3.7.8,CCE-38240-8 | Ensure 'Interactive logon - Require Domain Controller Authentication to unlock workstation' is set to 'Enabled'"
+     win_regedit:
+        path: HKLM:\Software\Microsoft\Windows Nt\Currentversion\Winlogon
+        name: "ForceUnlockLogon"
+        data: "1"
+        type: dword
+
+   - name: "2.3.7.9,CCE-38333-1 | Ensure 'Interactive logon - Smart card removal behavior' is set to 'Lock Workstation' or higher"
+     win_regedit:
+        path: HKLM:\Software\Microsoft\Windows Nt\Currentversion\Winlogon
+        name: "scremoveoption"
+        data: "1"
+        type: string
+
+   - name: "2.3.8.1,CCE-36325-9 | Ensure 'Microsoft network client - Digitally sign communications (always)' is set to 'Enabled'"
+     win_regedit:
+        path: HKLM:\System\Currentcontrolset\Services\Lanmanworkstation\Parameters
+        name: "RequireSecuritySignature"
+        data: "1"
+        type: dword
+
+   - name: "2.3.8.2,CCE-36269-9 | Ensure 'Microsoft network client - Digitally sign communications (if server agrees)' is set to 'Enabled'"
+     win_regedit:
+        path: HKLM:\System\Currentcontrolset\Services\Lanmanworkstation\Parameters
+        name: "EnableSecuritySignature"
+        data: "1"
+        type: dword
+
+   - name: "2.3.8.3,CCE-37863-8 | Ensure 'Microsoft network client - Send unencrypted password to third-party SMB servers' is set to 'Disabled'"
+     win_regedit:
+        path: HKLM:\System\Currentcontrolset\Services\Lanmanworkstation\Parameters
+        name: "EnablePlainTextPassword"
+        data: "0"
+        type: dword
+
+   - name: "2.3.9.1,CCE-38046-9 | Ensure 'Microsoft network server - Amount of idle time required before suspending session' is set to '15 or fewer, but not 0'"
+     win_regedit:
+        path: HKLM:\System\Currentcontrolset\Services\Lanmanserver\Parameters
+        name: "autodisconnect"
+        data: "15"
+        type: dword
+
+   - name: "2.3.9.2,CCE-37864-6 | Ensure 'Microsoft network server - Digitally sign communications (always)' is set to 'Enabled'"
+     win_regedit:
+        path: HKLM:\System\Currentcontrolset\Services\Lanmanserver\Parameters
+        name: "requiresecuritysignature"
+        data: "1"
+        type: dword
+
+   - name: "2.3.9.3,CCE-35988-5 | Ensure 'Microsoft network server - Digitally sign communications (if client agrees)' is set to 'Enabled'"
+     win_regedit:
+        path: HKLM:\System\Currentcontrolset\Services\Lanmanserver\Parameters
+        name: "enablesecuritysignature"
+        data: "1"
+        type: dword
+
+   - name: "2.3.9.4,CCE-37972-7 | Ensure 'Microsoft network server - Disconnect clients when logon hours expire' is set to 'Enabled'"
+     win_regedit:
+        path: HKLM:\System\Currentcontrolset\Services\Lanmanserver\Parameters
+        name: "enableforcedlogoff"
+        data: "1"
+        type: dword
+
+   - name: "2.3.9.5,CCE-36170-9 | Ensure 'Microsoft network server - Server SPN target name validation level' is set to 'Accept if provided by client' or higher"
+     win_regedit:
+        path: HKLM:\System\Currentcontrolset\Services\Lanmanserver\Parameters
+        name: "SMBServerNameHardeningLevel"
+        data: "1"
+        type: dword
+
+     #CIS-CAT unable to audit this control for non-domain-joined nodes
+   - name: "2.3.10.1,CCE-36065-1 | Ensure 'Network access - Allow anonymous SID/Name translation' is set to 'Disabled'"
+     win_security_policy:
+        section: System Access
+        key: LSAAnonymousNameLookup
+        value: 0
+
+   - name: "2.3.10.2,CCE-36316-8 | Ensure 'Network access - Do not allow anonymous enumeration of SAM accounts' is set to 'Enabled'"
+     win_regedit:
+        path: HKLM:\System\Currentcontrolset\Control\Lsa
+        name: "RestrictAnonymousSAM"
+        data: "1"
+        type: dword
+
+   - name: "2.3.10.3,CCE-36077-6 | Ensure 'Network access - Do not allow anonymous enumeration of SAM accounts and shares' is set to 'Enabled'"
+     win_regedit:
+        path: HKLM:\System\Currentcontrolset\Control\Lsa
+        name: "RestrictAnonymous"
+        data: "1"
+        type: dword
+
+   - name: "2.3.10.5,CCE-36148-5 | Ensure 'Network access - Let Everyone permissions apply to anonymous users' is set to 'Disabled'"
+     win_regedit:
+        path: HKLM:\System\Currentcontrolset\Control\Lsa
+        name: "EveryoneIncludesAnonymous"
+        data: "0"
+        type: dword
+
+   - name: "2.3.10.6,CCE-38258-0 | Configure 'Network access - Named Pipes that can be accessed anonymously'"
+     win_regedit:
+        path: HKLM:\System\Currentcontrolset\Services\Lanmanserver\Parameters
+        name: "NullSessionPipes"
+        data: ""
+        type: multistring
+
+   - name: "2.3.10.7,CCE-37194-8 | Configure 'Network access - Remotely accessible registry paths'"
+     win_regedit:
+        path: HKLM:\System\Currentcontrolset\Control\Securepipeservers\Winreg\AllowedExactpaths
+        name: "Machine"
+        data: ['System\CurrentControlSet\Control\ProductOptions', 'System\CurrentControlSet\Control\Server Applications', 'Software\Microsoft\Windows NT\CurrentVersion']
+        type: multistring
+
+   - name: "2.3.10.8,CCE-36347-3 | Configure 'Network access - Remotely accessible registry paths and sub-paths'"
+     win_regedit:
+        path: HKLM:\System\Currentcontrolset\Control\Securepipeservers\Winreg\Allowedpaths
+        name: "Machine"
+        data: ['System\CurrentControlSet\Control\Print\Printers', 'System\CurrentControlSet\Services\Eventlog', 'Software\Microsoft\OLAP Server', 'Software\Microsoft\Windows NT\CurrentVersion\Print', 'Software\Microsoft\Windows NT\CurrentVersion\Windows', 'System\CurrentControlSet\Control\ContentIndex', 'System\CurrentControlSet\Control\Terminal Server', 'System\CurrentControlSet\Control\Terminal Server\UserConfig', 'System\CurrentControlSet\Control\Terminal Server\DefaultUserConfiguration', 'Software\Microsoft\Windows NT\CurrentVersion\Perflib', 'System\CurrentControlSet\Services\WINS', 'System\CurrentControlSet\Services\CertSvc']
+        type: multistring
+
+   - name: "2.3.10.9,CCE-36021-4 | Ensure 'Network access - Restrict anonymous access to Named Pipes and Shares' is set to 'Enabled'"
+     win_regedit:
+        path: HKLM:\System\Currentcontrolset\Services\Lanmanserver\Parameters
+        name: "RestrictNullSessAccess"
+        data: "1"
+        type: dword
+
+   - name: "2.3.10.10,CCE-Null | Ensure 'Network access - Restrict clients allowed to make remote calls to SAM' is set to 'Administrators - Remote Access - Allow'"
+     win_regedit:
+        path: HKLM:\System\CurrentControlSet\Control\Lsa
+        name: "RestrictRemoteSAM"
+        data: "O:BAG:BAD:(A;;RC;;;BA)"
+        type: string
+
+   - name: "2.3.10.11,CCE-38095-6 | Ensure 'Network access - Shares that can be accessed anonymously' is set to 'None'"
+     win_regedit:
+        path: HKLM:\System\Currentcontrolset\Services\Lanmanserver\Parameters
+        name: "NullSessionShares"
+        data: ""
+        type: multistring
+
+   - name: "2.3.10.12,CCE-37623-6 | Ensure 'Network access - Sharing and security model for local accounts' is 'Classic - local users authenticate as themselves'"
+     win_regedit:
+        path: HKLM:\System\Currentcontrolset\Control\Lsa
+        name: "ForceGuest"
+        data: "0"
+        type: dword
+
+   - name: "2.3.11.1,CCE-38341-4 | Ensure 'Network security - Allow Local System to use computer identity for NTLM' is set to 'Enabled'"
+     win_regedit:
+        path: HKLM:\System\Currentcontrolset\Control\Lsa
+        name: "UseMachineId"
+        data: "1"
+        type: dword
+
+   - name: "2.3.11.2,CCE-37035-3 | Ensure 'Network security - Allow LocalSystem NULL session fallback' is set to 'Disabled'"
+     win_regedit:
+        path: HKLM:\System\Currentcontrolset\Control\Lsa\Msv1_0
+        name: "allownullsessionfallback"
+        data: "0"
+        type: dword
+
+   - name: "2.3.11.3,CCE-38047-7 | Ensure 'Network Security - Allow PKU2U authentication requests to this computer to use online identities' is set to 'Disabled'"
+     win_regedit:
+        path: HKLM:\System\Currentcontrolset\Control\Lsa\Pku2U
+        name: "AllowOnlineID"
+        data: "0"
+        type: dword
+
+   - name: "2.3.11.4,CCE-37755-6 | Ensure 'Network security - Configure encryption types allowed for Kerberos' is set"
+     win_regedit:
+        path: HKLM:\Software\Microsoft\Windows\Currentversion\Policies\System\Kerberos\Parameters
+        name: "SupportedEncryptionTypes"
+        data: "2147483644"
+        type: dword
+
+   - name: "2.3.11.5,CCE-36326-7 | Ensure 'Network security - Do not store LAN Manager hash value on next password change' is set to 'Enabled'"
+     win_regedit:
+        path: HKLM:\System\Currentcontrolset\Control\Lsa
+        name: "NoLMHash"
+        data: "1"
+        type: dword
+
+   - name: "2.3.11.6,CCE-36270-7 | Ensure 'Network security - Force logoff when logon hours expire' is set to 'Enabled'"
+     win_regedit:
+        path: HKLM:\System\CurrentControlSet\Services\LanManServer\Parameters
+        name: "EnableForcedLogOff"
+        data: "1"
+        type: dword
+
+   - name: "2.3.11.7,CCE-36173-3 | Ensure 'Network security - LAN Manager authentication level' is set to 'Send NTLMv2 response only. Refuse LM&NTLM'"
+     win_regedit:
+        path: HKLM:\System\Currentcontrolset\Control\Lsa
+        name: "LMCompatibilityLevel"
+        data: "5"
+        type: dword
+
+   - name: "2.3.11.8,CCE-36858-9 | Ensure 'Network security - LDAP client signing requirements' is set to 'Negotiate signing' or higher"
+     win_regedit:
+        path: HKLM:\System\Currentcontrolset\Services\Ldap
+        name: "LDAPClientIntegrity"
+        data: "1"
+        type: dword
+
+   - name: "2.3.11.9,CCE-37553-5 | Ensure 'Network security - Minimum session security for NTLM SSP based (including secure RPC) clients' is set"
+     win_regedit:
+        path: HKLM:\System\Currentcontrolset\Control\Lsa\Msv1_0
+        name: "NTLMMinClientSec"
+        data: "537395200"
+        type: dword
+
+   - name: "2.3.11.10,CCE-37835-6 | Ensure 'Network security - Minimum session security for NTLM SSP based (including secure RPC) servers' is set"
+     win_regedit:
+        path: HKLM:\System\Currentcontrolset\Control\Lsa\Msv1_0
+        name: "NTLMMinServerSec"
+        data: "537395200"
+        type: dword
+
+   - name: "2.3.13.1,CCE-36788-8 | Ensure 'Shutdown - Allow system to be shut down without having to log on' is set to 'Disabled'"
+     win_regedit:
+        path: HKLM:\Software\Microsoft\Windows\Currentversion\Policies\System
+        name: "ShutdownWithoutLogon"
+        data: "0"
+        type: dword
+
+   - name: "2.3.15.1,CCE-37885-1 | Ensure 'System objects - Require case insensitivity for non-Windows subsystems' is set to 'Enabled'"
+     win_regedit:
+        path: HKLM:\System\Currentcontrolset\Control\Session Manager\Kernel
+        name: "ObCaseInsensitive"
+        data: "1"
+        type: dword
+
+   - name: "2.3.15.2,CCE-37644-2 | Ensure 'System objects - Strengthen default permissions of internal system objects (e.g. Symbolic Links)' is set to 'Enabled'"
+     win_regedit:
+        path: HKLM:\System\Currentcontrolset\Control\Session Manager
+        name: "ProtectionMode"
+        data: "1"
+        type: dword
+
+##################
+## UAC SETTINGS ##
+##################
+
+   - name: "2.3.17.1,CCE-36494-3 | Ensure 'User Account Control - Admin Approval Mode for the Built-in Administrator account' is set to 'Enabled'"
+     win_regedit:
+        path: HKLM:\Software\Microsoft\Windows\Currentversion\Policies\System
+        name: "FilterAdministratorToken"
+        data: "1"
+        type: dword
+
+   - name: "2.3.17.2,CCE-36863-9 | Ensure 'User Account Control - Allow UIAccess applications to prompt for elevation without using the secure desktop' is set"
+     win_regedit:
+        path: HKLM:\Software\Microsoft\Windows\Currentversion\Policies\System
+        name: "EnableUIADesktopToggle"
+        data: "0"
+        type: dword
+
+   - name: "2.3.17.3,CCE-37029-6 | Ensure 'User Account Control - Behavior of the elevation prompt for administrators in Admin Approval Mode' is set"
+     win_regedit:
+        path: HKLM:\Software\Microsoft\Windows\Currentversion\Policies\System
+        name: "ConsentPromptBehaviorAdmin"
+        data: "2"
+        type: dword
+
+   - name: "2.3.17.4,CCE-36864-7 | Ensure 'User Account Control - Behavior of the elevation prompt for standard users' is 'Automatically deny elevation requests'"
+     win_regedit:
+        path: HKLM:\Software\Microsoft\Windows\Currentversion\Policies\System
+        name: "ConsentPromptBehaviorUser"
+        data: "0"
+        type: dword
+
+   - name: "2.3.17.5,CCE-36533-8 | Ensure 'User Account Control - Detect application installations and prompt for elevation' is set to 'Enabled'"
+     win_regedit:
+        path: HKLM:\Software\Microsoft\Windows\Currentversion\Policies\System
+        name: "EnableInstallerDetection"
+        data: "1"
+        type: dword
+
+   - name: "2.3.17.6,CCE-37057-7 | Ensure 'User Account Control - Only elevate UIAccess applications that are installed in secure locations' is set to 'Enabled'"
+     win_regedit:
+        path: HKLM:\Software\Microsoft\Windows\Currentversion\Policies\System
+        name: "EnableSecureUIAPaths"
+        data: "1"
+        type: dword
+
+   - name: "2.3.17.7,CCE-36869-6 | Ensure 'User Account Control - Run all administrators in Admin Approval Mode' is set to 'Enabled'"
+     win_regedit:
+        path: HKLM:\Software\Microsoft\Windows\Currentversion\Policies\System
+        name: "EnableLUA"
+        data: "1"
+        type: dword
+
+   - name: "2.3.17.8,CCE-36866-2 | Ensure 'User Account Control - Switch to the secure desktop when prompting for elevation' is set to 'Enabled'"
+     win_regedit:
+        path: HKLM:\Software\Microsoft\Windows\Currentversion\Policies\System
+        name: "PromptOnSecureDesktop"
+        data: "1"
+        type: dword
+
+   - name: "2.3.17.9,CCE-37064-3 | Ensure 'User Account Control - Virtualize file and registry write failures to per-user locations' is set to 'Enabled'"
+     win_regedit:
+        path: HKLM:\Software\Microsoft\Windows\Currentversion\Policies\System
+        name: "EnableVirtualization"
+        data: "1"
+        type: dword
+
+##########################
+##########################
+## CIS LEVEL 2 SETTINGS ##
+##########################
+##########################
+
+   - name: "2.3.7.6,CCE-37439-7 | Ensure 'Interactive logon - Number of previous logons to cache (in case domain controller is not available)' is set to '4 or fewer' [GSA-1 or fewer]"
+     win_regedit:
+        path: HKLM:\Software\Microsoft\Windows Nt\Currentversion\Winlogon
+        name: "cachedlogonscount"
+        data: "1"
+        type: string
+
+   - name: "2.3.10.4,CCE-38119-4 | Ensure 'Network access - Do not allow storage of passwords and credentials for network authentication' is set to 'Enabled'"
+     win_regedit:
+        path: HKLM:\System\Currentcontrolset\Control\Lsa
+        name: "DisableDomainCreds"
+        data: "1"
+        type: dword
+
+#########
+## EOF ##
+#########

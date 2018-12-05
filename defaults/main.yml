@@ -1,0 +1,7 @@
+# defaults file for Win2016
+win2016gsa_section01: true
+win2016gsa_section02: true
+win2016gsa_section09: true
+win2016gsa_section17: true
+win2016gsa_section18: true
+win2016gsa_section19: true

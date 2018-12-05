@@ -1,0 +1,133 @@
+##########################
+##########################
+## CIS LEVEL 1 SETTINGS ##
+##########################
+##########################
+
+###########################
+## AUDIT POLICY SETTINGS ##
+###########################
+
+   - name: "17.1.1,CCE-37741-6 | Ensure 'Audit Credential Validation' is set to 'Success and Failure'"
+     win_audit_policy_system:
+        subcategory: Credential Validation
+        audit_type: success, failure
+
+   - name: "17.2.1,CCE-38329-9 | Ensure 'Audit Application Group Management' is set to 'Success and Failure'"
+     win_audit_policy_system:
+        subcategory: Application Group Management
+        audit_type: success, failure
+
+   - name: "17.2.2,CCE-38004-8 | Ensure 'Audit Computer Account Management' is set to 'Success and Failure'"
+     win_audit_policy_system:
+        subcategory: Computer Account Management
+        audit_type: success, failure
+
+   - name: "17.2.4,CCE-37855-4 | Ensure 'Audit Other Account Management Events' is set to 'Success and Failure'"
+     win_audit_policy_system:
+        subcategory: Other Account Management Events
+        audit_type: success, failure
+
+   - name: "17.2.5,CCE-38034-5 | Ensure 'Audit Security Group Management' is set to 'Success and Failure'"
+     win_audit_policy_system:
+        subcategory: Security Group Management
+        audit_type: success, failure
+
+   - name: "17.2.6,CCE-37856-2 | Ensure 'Audit User Account Management' is set to 'Success and Failure'"
+     win_audit_policy_system:
+        subcategory: User Account Management
+        audit_type: success, failure
+
+   - name: "17.3.1,CCE-Null | Ensure 'Audit PNP Activity' is set to 'Success'"
+     win_audit_policy_system:
+        subcategory: Plug and Play Events
+        audit_type: success
+
+   - name: "17.3.2,CCE-36059-4 | Ensure 'Audit Process Creation' is set to 'Success'"
+     win_audit_policy_system:
+        subcategory: Process Creation
+        audit_type: success
+
+   - name: "17.5.1,CCE-37133-6 | Ensure 'Audit Account Lockout' is set to 'Success and Failure'"
+     win_audit_policy_system:
+        subcategory: Account Lockout
+        audit_type: success, failure
+
+   - name: "17.5.2,CCE-Null | Ensure 'Audit Group Membership' is set to 'Success'"
+     win_audit_policy_system:
+        subcategory: Group Membership
+        audit_type: success
+
+   - name: "17.5.3,CCE-38237-4 | Ensure 'Audit Logoff' is set to 'Success'"
+     win_audit_policy_system:
+        subcategory: Logoff
+        audit_type: success
+
+   - name: "17.5.4,CCE-38036-0 | Ensure 'Audit Logon' is set to 'Success and Failure'"
+     win_audit_policy_system:
+        subcategory: Logon
+        audit_type: success, failure
+
+   - name: "17.5.5,CCE-36322-6 | Ensure 'Audit Other Logon/Logoff Events' is set to 'Success and Failure'"
+     win_audit_policy_system:
+        subcategory: Other Logon/Logoff Events
+        audit_type: success, failure
+
+   - name: "17.5.6,CCE-36266-5 | Ensure 'Audit Special Logon' is set to 'Success'"
+     win_audit_policy_system:
+        subcategory: Special Logon
+        audit_type: success
+
+   - name: "17.6.1,CCE-37617-8 | Ensure 'Audit Removable Storage' is set to 'Success and Failure'"
+     win_audit_policy_system:
+        subcategory: Removable Storage
+        audit_type: success, failure
+
+   - name: "17.7.1,CCE-38028-7 | Ensure 'Audit Audit Policy Change' is set to 'Success and Failure'"
+     win_audit_policy_system:
+        subcategory: Audit Policy Change
+        audit_type: success, failure
+
+   - name: "17.7.2,CCE-38327-3 | Ensure 'Audit Authentication Policy Change' is set to 'Success'"
+     win_audit_policy_system:
+        subcategory: Authentication Policy Change
+        audit_type: success
+
+   - name: "17.7.3,CCE-36320-0 | Ensure 'Audit Authorization Policy Change' is set to 'Success'"
+     win_audit_policy_system:
+        subcategory: Authorization Policy Change
+        audit_type: success
+
+   - name: "17.8.1,CCE-36267-3 | Ensure 'Audit Sensitive Privilege Use' is set to 'Success and Failure'"
+     win_audit_policy_system:
+        subcategory: Sensitive Privilege Use
+        audit_type: success, failure
+
+   - name: "17.9.1,CCE-37853-9 | Ensure 'Audit IPsec Driver' is set to 'Success and Failure'"
+     win_audit_policy_system:
+        subcategory: IPsec Driver
+        audit_type: success, failure
+
+   - name: "17.9.2,CCE-38030-3 | Ensure 'Audit Other System Events' is set to 'Success and Failure'"
+     win_audit_policy_system:
+        subcategory: Other System Events
+        audit_type: success, failure
+
+   - name: "17.9.3,CCE-38114-5 | Ensure 'Audit Security State Change' is set to 'Success'"
+     win_audit_policy_system:
+        subcategory: Security State Change
+        audit_type: success
+
+   - name: "17.9.4,CCE-36144-4 | Ensure 'Audit Security System Extension' is set to 'Success and Failure'"
+     win_audit_policy_system:
+        subcategory: Security System Extension
+        audit_type: success, failure
+
+   - name: "17.9.5,CCE-37132-8 | Ensure 'Audit System Integrity' is set to 'Success and Failure'"
+     win_audit_policy_system:
+        subcategory: System Integrity
+        audit_type: success, failure
+
+#########
+## EOF ##
+#########

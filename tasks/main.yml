@@ -1,0 +1,11 @@
+- import_playbook: section01.yml
+
+- import_playbook: section02.yml
+
+- import_playbook: section09.yml
+
+- import_playbook: section17.yml
+
+- import_playbook: section18.yml
+
+- import_playbook: section19.yml

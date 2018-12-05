@@ -1,0 +1,1337 @@
+##########################
+##########################
+## CIS LEVEL 1 SETTINGS ##
+##########################
+##########################
+
+   - name: "18.1.1.1,CCE-38347-1 | Ensure 'Prevent enabling lock screen camera' is set to 'Enabled'"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windows\Personalization
+        name: "NoLockScreenCamera"
+        data: "1"
+        type: dword
+
+   - name: "18.1.1.2,CCE-38348-9 | Ensure 'Prevent enabling lock screen slide show' is set to 'Enabled'"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windows\Personalization
+        name: "NoLockScreenSlideshow"
+        data: "1"
+        type: dword
+
+   - name: "18.1.2.1,CCE-Null | Ensure 'Allow Input Personalization' is set to 'Disabled'"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Inputpersonalization
+        name: "AllowInputPersonalization"
+        data: "0"
+        type: dword
+
+   - name: "18.3.1,CCE-37067-6 | Ensure 'MSS - (AutoAdminLogon) Enable Automatic Logon (not recommended)' is set to 'Disabled'"
+     win_regedit:
+        path: HKLM:\Software\Microsoft\Windows Nt\Currentversion\Winlogon
+        name: "AutoAdminLogon"
+        data: "0"
+        type: string
+
+   - name: "18.3.2,CCE-36871-2 | Ensure 'MSS - (DisableIPSourceRouting IPv6) IP source routing protection level (protects against packet spoofing)' is set"
+     win_regedit:
+        path: HKLM:\System\Currentcontrolset\Services\Tcpip6\Parameters
+        name: "DisableIPSourceRouting"
+        data: "2"
+        type: dword
+
+   - name: "18.3.3,CCE-36535-3 | Ensure 'MSS - (DisableIPSourceRouting) IP source routing protection level (protects against packet spoofing)' is set"
+     win_regedit:
+        path: HKLM:\System\Currentcontrolset\Services\Tcpip\Parameters
+        name: "DisableIPSourceRouting"
+        data: "2"
+        type: dword
+
+   - name: "18.3.4,CCE-37988-3 | Ensure 'MSS - (EnableICMPRedirect) Allow ICMP redirects to override OSPF generated routes' is set to 'Disabled'"
+     win_regedit:
+        path: HKLM:\System\Currentcontrolset\Services\Tcpip\Parameters
+        name: "EnableICMPRedirect"
+        data: "0"
+        type: dword
+
+   - name: "18.3.6,CCE-36879-5 | Ensure 'MSS - (NoNameReleaseOnDemand) Allow the computer to ignore NetBIOS name release requests except from WINS servers' is set"
+     win_regedit:
+        path: HKLM:\System\Currentcontrolset\Services\Netbt\Parameters
+        name: "nonamereleaseondemand"
+        data: "1"
+        type: dword
+
+   - name: "18.3.8,CCE-36351-5 | Ensure 'MSS - (SafeDllSearchMode) Enable Safe DLL search mode (recommended)' is set to 'Enabled'"
+     win_regedit:
+        path: HKLM:\System\Currentcontrolset\Control\Session Manager
+        name: "SafeDllSearchMode"
+        data: "1"
+        type: dword
+
+   - name: "18.3.9,CCE-37993-3 | Ensure 'MSS - (ScreenSaverGracePeriod) The time in seconds before the screen saver grace period expires (0 recommended)' is set to 'Enabled - 5 or fewer seconds'"
+     win_regedit:
+        path: HKLM:\Software\Microsoft\Windows Nt\Currentversion\Winlogon
+        name: "ScreenSaverGracePeriod"
+        data: "5"
+        type: string
+
+   - name: "18.3.12,CCE-36880-3 | Ensure 'MSS - (WarningLevel) Percentage threshold for the security event log at which the system will generate a warning' is set"
+     win_regedit:
+        path: HKLM:\System\Currentcontrolset\Services\Eventlog\Security
+        name: "WarningLevel"
+        data: "90"
+        type: dword
+
+   - name: "18.4.4.1,CCE-Null | Set 'NetBIOS node type' to 'P-node' (Ensure NetBT Parameter 'NodeType' is set to '0x2 (2)')"
+     win_regedit:
+        path: HKLM:\System\CurrentControlSet\Services\NetBT\Parameters
+        name: "NodeType"
+        data: "2"
+        type: dword
+
+   - name: "18.4.4.2,CCE-Null | Ensure 'Turn off multicast name resolution' is set to 'Enabled'"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windows NT\DNSClient
+        name: "EnableMulticast"
+        data: "0"
+        type: dword
+
+   - name: "18.4.8.1,CCE-Null | Ensure 'Enable insecure guest logons' is set to 'Disabled'"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windows\Lanmanworkstation
+        name: "AllowInsecureGuestAuth"
+        data: "0"
+        type: dword
+
+   - name: "18.4.11.2,CCE-38002-2 | Ensure 'Prohibit installation and configuration of Network Bridge on your DNS domain network' is set to 'Enabled'"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windows\Network Connections
+        name: "NC_AllowNetBridge_NLA"
+        data: "0"
+        type: dword
+
+   - name: "18.4.11.3,CCE-Null | Ensure 'Prohibit use of Internet Connection Sharing on your DNS domain network' is set to 'Enabled'"
+     win_regedit:
+        path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\Network Connections
+        name: "NC_ShowSharedAccessUI"
+        data: "0"
+        type: dword
+
+   - name: "18.4.11.4,CCE-38188-9 | Ensure 'Require domain users to elevate when setting a network's location' is set to 'Enabled'"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windows\Network Connections
+        name: "NC_StdDomainUserSetLocation"
+        data: "1"
+        type: dword
+
+   - name: "18.4.14.1,CCE-Null | Hardened UNC Paths is set to 'Enabled, with 'Require Mutual Authentication' and 'Require Integrity' set for NETLOGON shares'"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windows\Networkprovider\Hardenedpaths
+        name: "\\\\*\\NETLOGON"
+        data: "RequireMutualAuthentication=1, RequireIntegrity=1"
+        type: string
+
+   - name: "18.4.14.1,CCE-Null | Hardened UNC Paths is set to 'Enabled, with 'Require Mutual Authentication' and 'Require Integrity' set for SYSVOL shares'"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windows\Networkprovider\Hardenedpaths
+        name: "\\\\*\\SYSVOL"
+        data: "RequireMutualAuthentication=1, RequireIntegrity=1"
+        type: string
+
+   - name: "18.4.21.1,CCE-38338-0 | Ensure 'Minimize the number of simultaneous connections to the Internet or a Windows Domain' is set to 'Enabled'"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windows\Wcmsvc\Grouppolicy
+        name: "fMinimizeConnections"
+        data: "1"
+        type: dword
+
+   - name: "18.6.1,CCE-37069-2 | Ensure 'Apply UAC restrictions to local accounts on network logons' is set to 'Enabled'"
+     win_regedit:
+        path: HKLM:\Software\Microsoft\Windows\Currentversion\Policies\System
+        name: "LocalAccountTokenFilterPolicy"
+        data: "0"
+        type: dword
+
+   - name: "18.6.2,CCE-38444-6 | Ensure 'WDigest Authentication' is set to 'Disabled'"
+     win_regedit:
+        path: HKLM:\System\Currentcontrolset\Control\Securityproviders\Wdigest
+        name: "UseLogonCredential"
+        data: "0"
+        type: dword
+
+   - name: "18.8.3.1,CCE-36925-6 | Ensure 'Include command line in process creation events' is set to 'Disabled'"
+     win_regedit:
+        path: HKLM:\Software\Microsoft\Windows\Currentversion\Policies\System\Audit
+        name: "ProcessCreationIncludeCmdLine_Enabled"
+        data: "0"
+        type: dword
+
+   - name: "18.8.12.1,CCE-37912-3 | Ensure 'Boot-Start Driver Initialization Policy' is set to 'Enabled - Good, unknown and bad but critical'"
+     win_regedit:
+        path: HKLM:\System\Currentcontrolset\Policies\Earlylaunch
+        name: "DriverLoadPolicy"
+        data: "3"
+        type: dword
+
+   - name: "18.8.19.2,CCE-36169-1 | Ensure 'Configure registry policy processing - Do not apply during periodic background processing' is set to 'Enabled - FALSE'"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windows\Group Policy\{35378Eac-683F-11D2-A89A-00C04Fbbcfa2}
+        name: "NoBackgroundPolicy"
+        data: "0"
+        type: dword
+
+   - name: "18.8.19.3,CCE-36169-1 | Ensure 'Configure registry policy processing - Process even if the Group Policy objects have not changed' is set to 'Enabled - TRUE'"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windows\Group Policy\{35378Eac-683F-11D2-A89A-00C04Fbbcfa2}
+        name: "NoGPOListChanges"
+        data: "0"
+        type: dword
+
+   - name: "18.8.19.4,CCE-Null | Ensure 'Continue experiences on this device' is set to 'Disabled'"
+     win_regedit:
+        path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\System
+        name: "EnableCdp"
+        data: "0"
+        type: dword
+
+   - name: "18.8.19.5,CCE-37712-7 | Ensure 'Turn off background refresh of Group Policy' is set to 'Disabled'"
+     win_regedit:
+        path: HKLM:\Software\Microsoft\Windows\Currentversion\Policies\System\DisableBkGndGroupPolicy
+        state: absent
+        delete_key: yes
+
+   - name: "18.8.25.1,CCE-Null | Ensure 'Block user from showing account details on sign-in' is set to 'Enabled'"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windows\System
+        name: "BlockUserFromShowingAccountDetailsOnSignin"
+        data: "1"
+        type: dword
+
+   - name: "18.8.25.2,CCE-38353-9 | Ensure 'Do not display network selection UI' is set to 'Enabled'"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windows\System
+        name: "DontDisplayNetworkSelectionUI"
+        data: "1"
+        type: dword
+
+   - name: "18.8.25.3,CCE-37838-0 | Ensure 'Do not enumerate connected users on domain-joined computers' is set to 'Enabled'"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windows\System
+        name: "DontEnumerateConnectedUsers"
+        data: "1"
+        type: dword
+
+   - name: "18.8.25.4,CCE-35894-5 | Ensure 'Enumerate local users on domain-joined computers' is set to 'Disabled'"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windows\System
+        name: "EnumerateLocalUsers"
+        data: "0"
+        type: dword
+
+   - name: "18.8.25.5,CCE-35893-7 | Ensure 'Turn off app notifications on the lock screen' is set to 'Enabled'"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windows\System
+        name: "DisableLockScreenAppNotifications"
+        data: "1"
+        type: dword
+
+   - name: "18.8.25.6,CCE-37528-7 | Ensure 'Turn on convenience PIN sign-in' is set to 'Disabled'"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windows\System
+        name: "AllowDomainPINLogon"
+        data: "0"
+        type: dword
+
+   - name: "18.8.26.1,CCE-Null | Ensure 'Untrusted Font Blocking' is set to 'Enabled - Block untrusted fonts and log events'"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windows Nt\Mitigationoptions
+        name: "MitigationOptions_FontBocking"
+        data: "1000000000000"
+        type: string
+
+   - name: "18.8.31.1,CCE-36388-7 | Ensure 'Configure Offer Remote Assistance' is set to 'Disabled'"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windows Nt\Terminal Services
+        name: "fAllowUnsolicited"
+        data: "0"
+        type: dword
+
+   - name: "18.8.31.2,CCE-37281-3 | Ensure 'Configure Solicited Remote Assistance' is set to 'Disabled'"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windows Nt\Terminal Services
+        name: "fAllowToGetHelp"
+        data: "0"
+        type: dword
+
+   - name: "18.8.32.1,CCE-37346-4 | Ensure 'Enable RPC Endpoint Mapper Client Authentication' is set to 'Enabled'"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windows Nt\Rpc
+        name: "EnableAuthEpResolution"
+        data: "1"
+        type: dword
+
+   - name: "18.9.6.1,CCE-38354-7 | Ensure 'Allow Microsoft accounts to be optional' is set to 'Enabled'"
+     win_regedit:
+        path: HKLM:\Software\Microsoft\Windows\Currentversion\Policies\System
+        name: "MSAOptional"
+        data: "1"
+        type: dword
+
+   - name: "18.9.8.1,CCE-37636-8 | Ensure 'Disallow Autoplay for non-volume devices' is set to 'Enabled'"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windows\Explorer
+        name: "NoAutoplayfornonVolume"
+        data: "1"
+        type: dword
+
+   - name: "18.9.8.2,CCE-38217-6 | Ensure 'Set the default behavior for AutoRun' is set to 'Enabled - Do not execute any autorun commands'"
+     win_regedit:
+        path: HKLM:\Software\Microsoft\Windows\Currentversion\Policies\Explorer
+        name: "NoAutorun"
+        data: "1"
+        type: dword
+
+   - name: "18.9.8.3,CCE-36875-3 | Ensure 'Turn off Autoplay' is set to 'Enabled - All drives'"
+     win_regedit:
+        path: HKLM:\Software\Microsoft\Windows\Currentversion\Policies\Explorer
+        name: "NoDriveTypeAutoRun"
+        data: "255"
+        type: dword
+
+   - name: "18.9.10.1.1,CCE-Null | Ensure 'Use enhanced anti-spoofing when available' is set to 'Enabled'"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Biometrics\Facialfeatures
+        name: "EnhancedAntiSpoofing"
+        data: "1"
+        type: dword
+
+   - name: "18.9.13.1,CCE-Null | Ensure 'Turn off Microsoft consumer experiences' is set to 'Enabled'"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windows\Cloudcontent
+        name: "DisableWindowsConsumerFeatures"
+        data: "1"
+        type: dword
+
+   - name: "18.9.14.1,CCE-Null | Ensure 'Require pin for pairing' is set to 'Enabled'"
+     win_regedit:
+        path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\Connect
+        name: "RequirePinForPairing"
+        data: "1"
+        type: dword
+
+   - name: "18.9.15.1,CCE-37534-5 | Ensure 'Do not display the password reveal button' is set to 'Enabled'"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windows\Credui
+        name: "DisablePasswordReveal"
+        data: "1"
+        type: dword
+
+   - name: "18.9.15.2,CCE-36512-2 | Ensure 'Enumerate administrator accounts on elevation' is set to 'Disabled'"
+     win_regedit:
+        path: HKLM:\Software\Microsoft\Windows\Currentversion\Policies\Credui
+        name: "EnumerateAdministrators"
+        data: "0"
+        type: dword
+
+   - name: "18.9.16.1,CCE-Null | Ensure 'Allow Telemetry' is set to 'Enabled - 0 - Security [Enterprise Only]'"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windows\Datacollection
+        name: "AllowTelemetry"
+        data: "0"
+        type: dword
+
+   - name: "18.9.16.2,CCE-Null | Ensure 'Disable pre-release features or settings' is set to 'Disabled'"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windows\Previewbuilds
+        name: "EnableConfigFlighting"
+        data: "0"
+        type: dword
+
+   - name: "18.9.16.3,CCE-Null | Ensure 'Do not show feedback notifications' is set to 'Enabled'"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windows\Datacollection
+        name: "DoNotShowFeedbackNotifications"
+        data: "1"
+        type: dword
+
+   - name: "18.9.16.4,CCE-Null | Ensure 'Toggle user control over Insider builds' is set to 'Disabled'"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windows\Previewbuilds
+        name: "AllowBuildPreview"
+        data: "0"
+        type: dword
+
+   - name: "18.9.26.1.1,CCE-37775-4 | Ensure 'Application - Control Event Log behavior when the log file reaches its maximum size' is set to 'Disabled'"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windows\Eventlog\Application
+        name: "Retention"
+        data: "0"
+        type: string
+
+   - name: "18.9.26.1.2,CCE-37948-7 | Ensure 'Application - Specify the maximum log file size (KB)' is set to 'Enabled - 32,768 or greater' [GSA-65,538 or greater]"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windows\Eventlog\Application
+        name: "MaxSize"
+        data: "65538"
+        type: dword
+
+   - name: "18.9.26.2.1,CCE-37145-0 | Ensure 'Security - Control Event Log behavior when the log file reaches its maximum size' is set to 'Disabled'"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windows\Eventlog\Security
+        name: "Retention"
+        data: "0"
+        type: string
+
+   - name: "18.9.26.2.2,CCE-37695-4 | Ensure 'Security - Specify the maximum log file size (KB)' is set to 'Enabled - 196,608 or greater'"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windows\Eventlog\Security
+        name: "MaxSize"
+        data: "196608"
+        type: dword
+
+   - name: "18.9.26.3.1,CCE-38276-2 | Ensure 'Setup - Control Event Log behavior when the log file reaches its maximum size' is set to 'Disabled'"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windows\Eventlog\Setup
+        name: "Retention"
+        data: "0"
+        type: string
+
+   - name: "18.9.26.3.2,CCE-37526-1 | Ensure 'Setup - Specify the maximum log file size (KB)' is set to 'Enabled - 32,768 or greater'"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windows\Eventlog\Setup
+        name: "MaxSize"
+        data: "32768"
+        type: dword
+
+   - name: "18.9.26.4.1,CCE-36160-0 | Ensure 'System - Control Event Log behavior when the log file reaches its maximum size' is set to 'Disabled'"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windows\Eventlog\System
+        name: "Retention"
+        data: "0"
+        type: string
+
+   - name: "18.9.26.4.2,CCE-36092-5 | Ensure 'System - Specify the maximum log file size (KB)' is set to 'Enabled - 32,768 or greater' [GSA-65,538 or greater]"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windows\Eventlog\System
+        name: "MaxSize"
+        data: "65538"
+        type: dword
+
+   - name: "18.9.30.2,CCE-35859-8 | Ensure 'Configure Windows SmartScreen' is set to 'Enabled'"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windows\System
+        name: "EnableSmartScreen"
+        data: "1"
+        type: dword
+
+   - name: "18.9.30.3,CCE-37809-1 | Ensure 'Turn off Data Execution Prevention for Explorer' is set to 'Disabled'"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windows\Explorer
+        name: "NoDataExecutionPrevention"
+        data: "0"
+        type: dword
+
+   - name: "18.9.30.4,CCE-36660-9 | Ensure 'Turn off heap termination on corruption' is set to 'Disabled'"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windows\Explorer
+        name: "NoHeapTerminationOnCorruption"
+        data: "0"
+        type: dword
+
+   - name: "18.9.30.5,CCE-36809-2 | Ensure 'Turn off shell protocol protected mode' is set to 'Disabled'"
+     win_regedit:
+        path: HKLM:\Software\Microsoft\Windows\Currentversion\Policies\Explorer
+        name: "PreXPSP2ShellProtocolBehavior"
+        data: "0"
+        type: dword
+
+   - name: "18.9.41.3,CCE-Null | Ensure 'Configure cookies' is set to 'Enabled - Block only 3rd-party cookies' or higher"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Microsoftedge\Main
+        name: "Cookies"
+        data: "1"
+        type: dword
+
+   - name: "18.9.41.4,CCE-Null | Ensure 'Configure Password Manager' is set to 'Disabled'"
+     win_regedit:
+        path: HKLM:\SOFTWARE\Policies\Microsoft\MicrosoftEdge\Main
+        name: "FormSuggest Passwords"
+        data: "no"
+        type: string
+
+   - name: "18.9.41.6,CCE-Null | Ensure 'Configure search suggestions in Address bar' is set to 'Disabled'"
+     win_regedit:
+        path: HKLM:\SOFTWARE\Policies\Microsoft\MicrosoftEdge\SearchScopes
+        name: "ShowSearchSuggestionsGlobal"
+        data: "0"
+        type: dword
+
+   - name: "18.9.41.7,CCE-Null | Ensure 'Configure SmartScreen Filter' is set to 'Enabled'"
+     win_regedit:
+        path: HKLM:\SOFTWARE\Policies\Microsoft\MicrosoftEdge\PhishingFilter
+        name: "EnabledV9"
+        data: "1"
+        type: dword
+
+   - name: "18.9.47.1,CCE-36939-7 | Ensure 'Prevent the usage of OneDrive (formerly SkyDrive) for file storage' is set to 'Enabled'"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windows\Onedrive
+        name: "DisableFileSyncNGSC"
+        data: "1"
+        type: dword
+
+   - name: "18.9.52.2.2,CCE-36223-6 | Ensure 'Do not allow passwords to be saved' is set to 'Enabled'"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windows Nt\Terminal Services
+        name: "DisablePasswordSaving"
+        data: "1"
+        type: dword
+
+   - name: "18.9.52.3.3.2,CCE-36509-8 | Ensure 'Do not allow drive redirection' is set to 'Enabled'"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windows Nt\Terminal Services
+        name: "fDisableCdm"
+        data: "1"
+        type: dword
+
+   - name: "18.9.52.3.9.1,CCE-37929-7 | Ensure 'Always prompt for password upon connection' is set to 'Enabled'"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windows Nt\Terminal Services
+        name: "fPromptForPassword"
+        data: "1"
+        type: dword
+
+   - name: "18.9.52.3.9.2,CCE-37567-5 | Ensure 'Require secure RPC communication' is set to 'Enabled'"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windows Nt\Terminal Services
+        name: "fEncryptRPCTraffic"
+        data: "1"
+        type: dword
+
+   - name: "18.9.52.3.9.3,CCE-36627-8 | Ensure 'Set client connection encryption level' is set to 'Enabled - High Level'"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windows Nt\Terminal Services
+        name: "MinEncryptionLevel"
+        data: "3"
+        type: dword
+
+   - name: "18.9.52.3.11.1,CCE-37946-1 | Ensure 'Do not delete temp folders upon exit' is set to 'Disabled'"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windows Nt\Terminal Services
+        name: "DeleteTempDirsOnExit"
+        data: "1"
+        type: dword
+
+   - name: "18.9.52.3.11.2,CCE-38180-6 | Ensure 'Do not use temporary folders per session' is set to 'Disabled'"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windows Nt\Terminal Services
+        name: "PerSessionTempDir"
+        data: "1"
+        type: dword
+
+   - name: "18.9.53.1,CCE-37126-0 | Ensure 'Prevent downloading of enclosures' is set to 'Enabled'"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Internet Explorer\Feeds
+        name: "DisableEnclosureDownload"
+        data: "1"
+        type: dword
+
+   - name: "18.9.54.2,CCE-Null | Ensure 'Allow Cortana' is set to 'Disabled'"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windows\Windows Search
+        name: "AllowCortana"
+        data: "0"
+        type: dword
+
+   - name: "18.9.54.3,CCE-Null | Ensure 'Allow Cortana above lock screen' is set to 'Disabled'"
+     win_regedit:
+        path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\Windows Search
+        name: "AllowCortanaAboveLock"
+        data: "0"
+        type: dword
+
+   - name: "18.9.54.4,CCE-38277-0 | Ensure 'Allow indexing of encrypted files' is set to 'Disabled'"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windows\Windows Search
+        name: "AllowIndexingEncryptedStoresOrItems"
+        data: "0"
+        type: dword
+
+   - name: "18.9.54.5,CCE-Null | Ensure 'Allow search and Cortana to use location' is set to 'Disabled'"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windows\Windows Search
+        name: "AllowSearchToUseLocation"
+        data: "0"
+        type: dword
+
+   - name: "18.9.61.2,CCE-38360-4 | Ensure 'Turn off Automatic Download and Install of updates' is set to 'Disabled'"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windowsstore
+        name: "AutoDownload"
+        data: "4"
+        type: dword
+
+   - name: "18.9.61.3,CCE-38362-0 | Ensure 'Turn off the offer to update to the latest version of Windows' is set to 'Enabled'"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windowsstore
+        name: "DisableOSUpgrade"
+        data: "1"
+        type: dword
+
+   - name: "18.9.73.2,CCE-Null | Ensure 'Allow Windows Ink Workspace' is set to 'Enabled - On, but disallow access above lock' OR 'Disabled' but not 'Enabled - On'"
+     win_regedit:
+        path: HKLM:\SOFTWARE\Policies\Microsoft\WindowsInkWorkspace
+        name: "AllowWindowsInkWorkspace"
+        data: "1"
+        type: dword
+
+   - name: "18.9.74.1,CCE-36400-0 | Ensure 'Allow user control over installs' is set to 'Disabled'"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windows\Installer
+        name: "EnableUserControl"
+        data: "0"
+        type: dword
+
+   - name: "18.9.74.2,CCE-36919-9 | Ensure 'Always install with elevated privileges' is set to 'Disabled'"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windows\Installer
+        name: "AlwaysInstallElevated"
+        data: "0"
+        type: dword
+
+   - name: "18.9.75.1,CCE-36977-7 | Ensure 'Sign-in last interactive user automatically after a system-initiated restart' is set to 'Disabled'"
+     win_regedit:
+        path: HKLM:\Software\Microsoft\Windows\Currentversion\Policies\System
+        name: "DisableAutomaticRestartSignOn"
+        data: "1"
+        type: dword
+
+#########################
+## POWERSHELL SETTINGS ##
+#########################
+
+   - name: "CIS-Null,CCE-Null | Ensure 'Turn on PowerShell Module Logging' is set to 'Enabled, Modules=*'"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windows\Powershell\ModuleLogging
+        name: "EnableModuleLogging"
+        data: "1"
+        type: dword
+
+   - name: "18.9.84.1,CCE-Null | Ensure 'Turn on PowerShell Script Block Logging' is set to 'Disabled' [GSA-Enabled]"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windows\Powershell\Scriptblocklogging
+        name: "EnableScriptBlockLogging"
+        data: "1"
+        type: dword
+
+   - name: "18.9.84.2,CCE-Null | Ensure 'Turn on PowerShell Transcription' is set to 'Disabled' [GSA-Enabled]"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windows\Powershell\Transcription
+        name: "EnableTranscripting"
+        data: "1"
+        type: dword
+
+####################
+## WINRM SETTINGS ##
+####################
+
+   - name: "18.9.86.1.1,CCE-36310-1 | Ensure 'Allow Basic authentication' is set to 'Disabled'"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windows\Winrm\Client
+        name: "AllowBasic"
+        data: "0"
+        type: dword
+
+   - name: "18.9.86.1.2,CCE-37726-7 | Ensure 'Allow unencrypted traffic' is set to 'Disabled'"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windows\Winrm\Client
+        name: "AllowUnencryptedTraffic"
+        data: "0"
+        type: dword
+
+   - name: "18.9.86.1.3,CCE-38318-2 | Ensure 'Disallow Digest authentication' is set to 'Enabled'"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windows\Winrm\Client
+        name: "AllowDigest"
+        data: "0"
+        type: dword
+
+   - name: "18.9.86.2.1,CCE-36254-1 | Ensure 'Allow Basic authentication' is set to 'Disabled'"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windows\Winrm\Service
+        name: "AllowBasic"
+        data: "0"
+        type: dword
+
+     #This control will have to be set to Enabled (1) to allow for continued remote management via Ansible following machine restart
+   - name: "18.9.86.2.2,CCE-37927-1 | Ensure 'Allow remote server management through WinRM' is set to 'Disabled'"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windows\Winrm\Service
+        name: "AllowAutoConfig"
+        data: "0"
+        type: dword
+
+   - name: "18.9.86.2.3,CCE-38223-4 | Ensure 'Allow unencrypted traffic' is set to 'Disabled'"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windows\Winrm\Service
+        name: "AllowUnencryptedTraffic"
+        data: "0"
+        type: dword
+
+   - name: "18.9.86.2.4,CCE-36000-8 | Ensure 'Disallow WinRM from storing RunAs credentials' is set to 'Enabled'"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windows\Winrm\Service
+        name: "DisableRunAs"
+        data: "1"
+        type: dword
+
+     #This control will have to be set to Enabled (1) to allow for continued remote management via Ansible following machine restart
+   - name: "18.9.87.1,CCE-36499-2 | Ensure 'Allow Remote Shell Access' is set to 'Disabled'"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windows\Winrm\Service\Winrs
+        name: "AllowRemoteShellAccess"
+        data: "0"
+        type: dword
+
+#############################
+## WINDOWS UPDATE SETTINGS ##
+#############################
+
+   - name: "18.9.90.1.1,CCE-Null | Ensure 'Select when Feature Updates are received' is 'Enabled - Current Branch for Business, 180 days' - DeferFeatureUpdates"
+     win_regedit:
+        path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate
+        name: "DeferFeatureUpdates"
+        data: "1"
+        type: dword
+
+   - name: "18.9.90.1.1,CCE-Null | Ensure 'Select when Feature Updates are received' is 'Enabled - Current Branch for Business, 180 days' - DeferFeatureUpdatesPeriodInDays"
+     win_regedit:
+        path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate
+        name: "DeferFeatureUpdatesPeriodInDays"
+        data: "180"
+        type: dword
+
+   - name: "18.9.90.1.1,CCE-Null | Ensure 'Select when Feature Updates are received' is 'Enabled - Current Branch for Business, 180 days' - BranchReadinessLevel"
+     win_regedit:
+        path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate
+        name: "BranchReadinessLevel"
+        data: "32"
+        type: dword
+
+   - name: "18.9.90.1.2,CCE-Null | Ensure 'Select when Quality Updates are received' is set to 'Enabled - 0 days' - DeferQualityUpdates"
+     win_regedit:
+        path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate
+        name: "DeferQualityUpdates"
+        data: "1"
+        type: dword
+
+   - name: "18.9.90.1.2,CCE-Null | Ensure 'Select when Quality Updates are received' is set to 'Enabled - 0 days' - DeferQualityUpdatesPeriodInDays"
+     win_regedit:
+        path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate
+        name: "DeferQualityUpdatesPeriodInDays"
+        data: "0"
+        type: dword
+
+   - name: "18.9.90.2,CCE-36172-5 | Ensure 'Configure Automatic Updates' is set to 'Enabled'"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windows\Windowsupdate\Au
+        name: "NoAutoUpdate"
+        data: "0"
+        type: dword
+
+   - name: "18.9.90.3,CCE-36172-5 | Ensure 'Configure Automatic Updates - Scheduled install day' is set to '0 - Every day'"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windows\Windowsupdate\Au
+        name: "ScheduledInstallDay"
+        data: "0"
+        type: dword
+
+   - name: "18.9.90.4,CCE-37027-0 | Ensure 'No auto-restart with logged on users for scheduled automatic updates installations' is set to 'Disabled'"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windows\Windowsupdate\Au
+        name: "NoAutoRebootWithLoggedOnUsers"
+        data: "0"
+        type: dword
+
+##########################
+##########################
+## CIS LEVEL 2 SETTINGS ##
+##########################
+##########################
+
+   - name: "18.3.5,CCE-36868-8 | Ensure 'MSS - (KeepAliveTime) How often keep-alive packets are sent in milliseconds' is set to 'Enabled - 300,000 or 5 minutes'"
+     win_regedit:
+        path: HKLM:\System\Currentcontrolset\Services\Tcpip\Parameters
+        name: "KeepAliveTime"
+        data: "300000"
+        type: dword
+
+   - name: "18.3.7,CCE-38065-9 | Ensure 'MSS - (PerformRouterDiscovery) Allow IRDP to detect and configure Default Gateway addresses (could lead to DoS)' is set to 'Disabled'"
+     win_regedit:
+        path: HKLM:\System\Currentcontrolset\Services\Tcpip\Parameters
+        name: "PerformRouterDiscovery"
+        data: "0"
+        type: dword
+
+   - name: "18.3.10,CCE-37846-3 | Ensure 'MSS - (TcpMaxDataRetransmissions IPv6) How many times unacknowledged data is retransmitted' is set to 'Enabled - 3'"
+     win_regedit:
+        path: HKLM:\System\Currentcontrolset\Services\Tcpip6\Parameters
+        name: "tcpmaxdataretransmissions"
+        data: "3"
+        type: dword
+
+   - name: "18.3.11,CCE-36051-1 | Ensure 'MSS - (TcpMaxDataRetransmissions) How many times unacknowledged data is retransmitted' is set to 'Enabled - 3'"
+     win_regedit:
+        path: HKLM:\System\Currentcontrolset\Services\Tcpip\Parameters
+        name: "tcpmaxdataretransmissions"
+        data: "3"
+        type: dword
+
+   - name: "18.4.5.1,CCE-Null | Ensure 'Enable Font Providers' is set to 'Disabled'"
+     win_regedit:
+        path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\System
+        name: "EnableFontProviders"
+        data: "0"
+        type: dword
+
+   - name: "18.4.9.1,CCE-38170-7 | Ensure 'Turn on Mapper I/O (LLTDIO) driver' is set to 'Disabled' - AllowLLTDIOOndomain"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windows\Lltd
+        name: "AllowLLTDIOOndomain"
+        data: "0"
+        type: dword
+
+   - name: "18.4.9.1,CCE-38170-7 | Ensure 'Turn on Mapper I/O (LLTDIO) driver' is set to 'Disabled' - AllowLLTDIOOnPublicNet"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windows\Lltd
+        name: "AllowLLTDIOOnPublicNet"
+        data: "0"
+        type: dword
+
+   - name: "18.4.9.1,CCE-38170-7 | Ensure 'Turn on Mapper I/O (LLTDIO) driver' is set to 'Disabled' - EnableLLTDIO"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windows\Lltd
+        name: "EnableLLTDIO"
+        data: "0"
+        type: dword
+
+   - name: "18.4.9.1,CCE-38170-7 | Ensure 'Turn on Mapper I/O (LLTDIO) driver' is set to 'Disabled' - ProhibitLLTDIOOnPrivateNet"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windows\Lltd
+        name: "ProhibitLLTDIOOnPrivateNet"
+        data: "0"
+        type: dword
+
+   - name: "18.4.9.2,CCE-37959-4 | Ensure 'Turn on Responder (RSPNDR) driver' is set to 'Disabled' - AllowRspndrOnDomain"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windows\Lltd
+        name: "AllowRspndrOnDomain"
+        data: "0"
+        type: dword
+
+   - name: "18.4.9.2,CCE-37959-4 | Ensure 'Turn on Responder (RSPNDR) driver' is set to 'Disabled' - AllowRspndrOnPublicNet"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windows\Lltd
+        name: "AllowRspndrOnPublicNet"
+        data: "0"
+        type: dword
+
+   - name: "18.4.9.2,CCE-37959-4 | Ensure 'Turn on Responder (RSPNDR) driver' is set to 'Disabled' - EnableRspndr"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windows\Lltd
+        name: "EnableRspndr"
+        data: "0"
+        type: dword
+
+   - name: "18.4.9.2,CCE-37959-4 | Ensure 'Turn on Responder (RSPNDR) driver' is set to 'Disabled' - ProhibitRspndrOnPrivateNet"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windows\Lltd
+        name: "ProhibitRspndrOnPrivateNet"
+        data: "0"
+        type: dword
+
+   - name: "18.4.10.2,CCE-37699-6 | Ensure 'Turn off Microsoft Peer-to-Peer Networking Services' is set to 'Enabled'"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Peernet
+        name: "Disabled"
+        data: "1"
+        type: dword
+
+   - name: "18.4.20.1,CCE-37481-9 | Ensure 'Configuration of wireless settings using Windows Connect Now' is set to 'Disabled' - EnableRegistrars"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windows\Wcn\Registrars
+        name: "EnableRegistrars"
+        data: "0"
+        type: dword
+
+   - name: "18.4.20.1,CCE-37481-9 | Ensure 'Configuration of wireless settings using Windows Connect Now' is set to 'Disabled' - DisableUPnPRegistrar"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windows\Wcn\Registrars
+        name: "DisableUPnPRegistrar"
+        data: "0"
+        type: dword
+
+   - name: "18.4.20.1,CCE-37481-9 | Ensure 'Configuration of wireless settings using Windows Connect Now' is set to 'Disabled' - DisableInBand802DOT11Registrar"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windows\Wcn\Registrars
+        name: "DisableInBand802DOT11Registrar"
+        data: "0"
+        type: dword
+
+   - name: "18.4.20.1,CCE-37481-9 | Ensure 'Configuration of wireless settings using Windows Connect Now' is set to 'Disabled' - DisableFlashConfigRegistrar"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windows\Wcn\Registrars
+        name: "DisableFlashConfigRegistrar"
+        data: "0"
+        type: dword
+
+   - name: "18.4.20.1,CCE-37481-9 | Ensure 'Configuration of wireless settings using Windows Connect Now' is set to 'Disabled' - DisableWPDRegistrar"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windows\Wcn\Registrars
+        name: "DisableWPDRegistrar"
+        data: "0"
+        type: dword
+
+   - name: "18.4.20.2,CCE-36109-7 | Ensure 'Prohibit access of the Windows Connect Now wizards' is set to 'Enabled'"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windows\Wcn\Ui
+        name: "DisableWcnUi"
+        data: "1"
+        type: dword
+
+   - name: "18.4.21.2,CCE-37627-7 | Ensure 'Prohibit connection to non-domain networks when connected to domain authenticated network' is set to 'Enabled'"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windows\Wcmsvc\Grouppolicy
+        name: "fBlockNonDomain"
+        data: "1"
+        type: dword
+
+   - name: "18.8.20.1.1,CCE-37904-0 | Ensure 'Turn off access to the Store' is set to 'Enabled'"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windows\Explorer
+        name: "NoUseStoreOpenWith"
+        data: "1"
+        type: dword
+
+   - name: "18.8.20.1.2,CCE-36625-2 | Ensure 'Turn off downloading of print drivers over HTTP' is set to 'Enabled'"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windows Nt\Printers
+        name: "DisableWebPnPDownload"
+        data: "1"
+        type: dword
+
+   - name: "18.8.20.1.3,CCE-37911-5 | Ensure 'Turn off handwriting personalization data sharing' is set to 'Enabled'"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windows\Tabletpc
+        name: "PreventHandwritingDataSharing"
+        data: "1"
+        type: dword
+
+   - name: "18.8.20.1.4,CCE-36203-8 | Ensure 'Turn off handwriting recognition error reporting' is set to 'Enabled'"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windows\Handwritingerrorreports
+        name: "PreventHandwritingErrorReports"
+        data: "1"
+        type: dword
+
+   - name: "18.8.20.1.5,CCE-37163-3 | Ensure 'Turn off Internet Connection Wizard if URL connection is referring to Microsoft.com' is set to 'Enabled'"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windows\Internet Connection Wizard
+        name: "ExitOnMSICW"
+        data: "1"
+        type: dword
+
+   - name: "18.8.20.1.6,CCE-36096-6 | Ensure 'Turn off Internet download for Web publishing and online ordering wizards' is set to 'Enabled'"
+     win_regedit:
+        path: HKLM:\Software\Microsoft\Windows\Currentversion\Policies\Explorer
+        name: "NoWebServices"
+        data: "1"
+        type: dword
+
+   - name: "18.8.20.1.7,CCE-36920-7 | Ensure 'Turn off printing over HTTP' is set to 'Enabled'"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windows Nt\Printers
+        name: "DisableHTTPPrinting"
+        data: "1"
+        type: dword
+
+   - name: "18.8.20.1.8,CCE-36352-3 | Ensure 'Turn off Registration if URL connection is referring to Microsoft.com' is set to 'Enabled'"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windows\Registration Wizard Control
+        name: "NoRegistration"
+        data: "1"
+        type: dword
+
+   - name: "18.8.20.1.9,CCE-36884-5 | Ensure 'Turn off Search Companion content file updates' is set to 'Enabled'"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Searchcompanion
+        name: "DisableContentFileUpdates"
+        data: "1"
+        type: dword
+
+   - name: "18.8.20.1.10,CCE-38275-4 | Ensure 'Turn off the 'Order Prints' picture task' is set to 'Enabled'"
+     win_regedit:
+        path: HKLM:\Software\Microsoft\Windows\Currentversion\Policies\Explorer
+        name: "NoOnlinePrintsWizard"
+        data: "1"
+        type: dword
+
+   - name: "18.8.20.1.11,CCE-37090-8 | Ensure 'Turn off the 'Publish to Web' task for files and folders' is set to 'Enabled'"
+     win_regedit:
+        path: HKLM:\Software\Microsoft\Windows\Currentversion\Policies\Explorer
+        name: "NoPublishingWizard"
+        data: "1"
+        type: dword
+
+   - name: "18.8.20.1.12,CCE-36628-6 | Ensure 'Turn off the Windows Messenger Customer Experience Improvement Program' is set to 'Enabled'"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Messenger\Client
+        name: "CEIP"
+        data: "2"
+        type: dword
+
+   - name: "18.8.20.1.13,CCE-36174-1 | Ensure 'Turn off Windows Customer Experience Improvement Program' is set to 'Enabled'"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Sqmclient\Windows
+        name: "CEIPEnable"
+        data: "0"
+        type: dword
+
+   - name: "18.8.20.1.14,CCE-35964-6 | Ensure 'Turn off Windows Error Reporting' is set to 'Enabled'"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windows\Windows Error Reporting
+        name: "Disabled"
+        data: "1"
+        type: dword
+
+   - name: "18.8.23.1,CCE-Null | Ensure 'Support device authentication using certificate' is set to 'Enabled - Automatic' - Enabled"
+     win_regedit:
+        path: HKLM:\Software\Microsoft\Windows\CurrentVersion\Policies\System\kerberos\parameters
+        name: "DevicePKInitEnabled"
+        data: "1"
+        type: dword
+
+   - name: "18.8.23.1,CCE-Null | Ensure 'Support device authentication using certificate' is set to 'Enabled - Automatic' - Behavior"
+     win_regedit:
+        path: HKLM:\Software\Microsoft\Windows\CurrentVersion\Policies\System\kerberos\parameters
+        name: "DevicePKInitBehavior"
+        data: "0"
+        type: dword
+
+   - name: "18.8.24.1,CCE-36343-2 | Ensure 'Disallow copying of user input methods to the system account for sign-in' is set to 'Enabled'"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Control Panel\International
+        name: "BlockUserInputMethodsForSignIn"
+        data: "1"
+        type: dword
+
+   - name: "18.8.29.5.3,CCE-36881-1 | Ensure 'Require a password when a computer wakes (on battery)' is set to 'Enabled'"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Power\Powersettings\0E796Bdb-100D-47D6-A2D5-F7D2Daa51F51
+        name: "DCSettingIndex"
+        data: "1"
+        type: dword
+
+   - name: "18.8.29.5.4,CCE-37066-8 | Ensure 'Require a password when a computer wakes (plugged in)' is set to 'Enabled'"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Power\Powersettings\0E796Bdb-100D-47D6-A2D5-F7D2Daa51F51
+        name: "ACSettingIndex"
+        data: "1"
+        type: dword
+
+   - name: "18.8.32.2,CCE-36559-3 | Ensure 'Restrict Unauthenticated RPC clients' is set to 'Enabled - Authenticated'"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windows Nt\Rpc
+        name: "RestrictRemoteClients"
+        data: "1"
+        type: dword
+
+   - name: "18.8.39.5.1,CCE-38161-6 | Ensure 'Microsoft Support Diagnostic Tool - Turn on MSDT interactive communication with support provider' is set to 'Disabled'"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windows\Scripteddiagnosticsprovider\Policy
+        name: "DisableQueryRemoteServer"
+        data: "0"
+        type: dword
+
+   - name: "18.8.39.11.1,CCE-36648-4 | Ensure 'Enable/Disable PerfTrack' is set to 'Disabled'"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windows\Wdi\{9C5A40Da-B965-4Fc3-8781-88Dd50A6299D}
+        name: "ScenarioExecutionEnabled"
+        data: "0"
+        type: dword
+
+   - name: "18.8.41.1,CCE-36931-4 | Ensure 'Turn off the advertising ID' is set to 'Enabled'"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windows\Advertisinginfo
+        name: "DisabledByGroupPolicy"
+        data: "1"
+        type: dword
+
+   - name: "18.8.44.1.1,CCE-37843-0 | Ensure 'Enable Windows NTP Client' is set to 'Enabled'"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\W32Time\Timeproviders\Ntpclient
+        name: "Enabled"
+        data: "1"
+        type: dword
+
+   - name: "18.8.44.1.2,CCE-37319-1 | Ensure 'Enable Windows NTP Server' is set to 'Disabled'"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\W32Time\Timeproviders\Ntpserver
+        name: "Enabled"
+        data: "0"
+        type: dword
+
+   - name: "18.9.4.1,CCE-Null | Ensure 'Allow a Windows app to share application data between users' is set to 'Disabled'"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windows\Currentversion\Appmodel\Statemanager
+        name: "AllowSharedLocalAppData"
+        data: "0"
+        type: dword
+
+   - name: "18.9.5.1,CCE-Null | Ensure 'Let Windows apps *' is set to 'Enabled - Force Deny' - LetAppsAccessAccountInfo"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windows\AppPrivacy
+        name: "LetAppsAccessAccountInfo"
+        data: "2"
+        type: dword
+
+   - name: "18.9.5.1,CCE-Null | Ensure 'Let Windows apps *' is set to 'Enabled - Force Deny' - LetAppsAccessCalendar"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windows\AppPrivacy
+        name: "LetAppsAccessCalendar"
+        data: "2"
+        type: dword
+
+   - name: "18.9.5.1,CCE-Null | Ensure 'Let Windows apps *' is set to 'Enabled - Force Deny' - LetAppsAccessCallHistory"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windows\AppPrivacy
+        name: "LetAppsAccessCallHistory"
+        data: "2"
+        type: dword
+
+   - name: "18.9.5.1,CCE-Null | Ensure 'Let Windows apps *' is set to 'Enabled - Force Deny' - LetAppsAccessCamera"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windows\AppPrivacy
+        name: "LetAppsAccessCamera"
+        data: "2"
+        type: dword
+
+   - name: "18.9.5.1,CCE-Null | Ensure 'Let Windows apps *' is set to 'Enabled - Force Deny' - LetAppsAccessContacts"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windows\AppPrivacy
+        name: "LetAppsAccessContacts"
+        data: "2"
+        type: dword
+
+   - name: "18.9.5.1,CCE-Null | Ensure 'Let Windows apps *' is set to 'Enabled - Force Deny' - LetAppsAccessEmail"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windows\AppPrivacy
+        name: "LetAppsAccessEmail"
+        data: "2"
+        type: dword
+
+   - name: "18.9.5.1,CCE-Null | Ensure 'Let Windows apps *' is set to 'Enabled - Force Deny' - LetAppsAccessLocation"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windows\AppPrivacy
+        name: "LetAppsAccessLocation"
+        data: "2"
+        type: dword
+
+   - name: "18.9.5.1,CCE-Null | Ensure 'Let Windows apps *' is set to 'Enabled - Force Deny' - LetAppsAccessMessaging"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windows\AppPrivacy
+        name: "LetAppsAccessMessaging"
+        data: "2"
+        type: dword
+
+   - name: "18.9.5.1,CCE-Null | Ensure 'Let Windows apps *' is set to 'Enabled - Force Deny' - LetAppsAccessMicrophone"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windows\AppPrivacy
+        name: "LetAppsAccessMicrophone"
+        data: "2"
+        type: dword
+
+   - name: "18.9.5.1,CCE-Null | Ensure 'Let Windows apps *' is set to 'Enabled - Force Deny' - LetAppsAccessMotion"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windows\AppPrivacy
+        name: "LetAppsAccessMotion"
+        data: "2"
+        type: dword
+
+   - name: "18.9.5.1,CCE-Null | Ensure 'Let Windows apps *' is set to 'Enabled - Force Deny' - LetAppsAccessRadios"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windows\AppPrivacy
+        name: "LetAppsAccessRadios"
+        data: "2"
+        type: dword
+
+   - name: "18.9.5.1,CCE-Null | Ensure 'Let Windows apps *' is set to 'Enabled - Force Deny' - LetAppsAccessTrustedDevices"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windows\AppPrivacy
+        name: "LetAppsAccessTrustedDevices"
+        data: "2"
+        type: dword
+
+   - name: "18.9.5.1,CCE-Null | Ensure 'Let Windows apps *' is set to 'Enabled - Force Deny' - LetAppsSyncWithDevices"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windows\AppPrivacy
+        name: "LetAppsSyncWithDevices"
+        data: "2"
+        type: dword
+
+   - name: "18.9.5.1,CCE-Null | Ensure 'Let Windows apps *' is set to 'Enabled - Force Deny' - LetAppsAccessPhone"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windows\AppPrivacy
+        name: "LetAppsAccessPhone"
+        data: "2"
+        type: dword
+
+   - name: "18.9.5.1,CCE-Null | Ensure 'Let Windows apps *' is set to 'Enabled - Force Deny' - LetAppsAccessNotifications"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windows\AppPrivacy
+        name: "LetAppsAccessNotifications"
+        data: "2"
+        type: dword
+
+   - name: "18.9.6.2,CCE-Null | Ensure 'Block launching Windows Store apps with Windows Runtime API access from hosted content.' is set to 'Enabled'"
+     win_regedit:
+        path: HKLM:\Software\Microsoft\Windows\Currentversion\Policies\System
+        name: "BlockHostedAppAccessWinRT"
+        data: "1"
+        type: dword
+
+   - name: "18.9.37.2,CCE-36886-0 | Ensure 'Turn off location' is set to 'Enabled'"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windows\Locationandsensors
+        name: "DisableLocation"
+        data: "1"
+        type: dword
+
+   - name: "18.9.41.1,CCE-Null | Ensure 'Allow Extensions' is set to 'Disabled'"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\MicrosoftEdge\Extensions
+        name: "ExtensionsEnabled"
+        data: "0"
+        type: dword
+
+   - name: "18.9.41.5,CCE-Null | Ensure 'Configure Pop-up Blocker' is set to 'Enabled'"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\MicrosoftEdge\Main
+        name: "AllowPopups"
+        data: "yes"
+        type: string
+
+   - name: "18.9.41.8,CCE-Null | Ensure 'Prevent access to the about-flags page in Microsoft Edge' is set to 'Enabled'"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\MicrosoftEdge\Main
+        name: "PreventAccessToAboutFlagsInMicrosoftEdge"
+        data: "1"
+        type: dword
+
+   - name: "18.9.41.9,CCE-Null | Ensure 'Prevent bypassing SmartScreen prompts for files' is set to 'Enabled'"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\MicrosoftEdge\PhishingFilter
+        name: "PreventOverrideAppRepUnknown"
+        data: "1"
+        type: dword
+
+   - name: "18.9.41.10,CCE-Null | Ensure 'Prevent bypassing SmartScreen prompts for sites' is set to 'Enabled'"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\MicrosoftEdge\PhishingFilter
+        name: "PreventOverride"
+        data: "1"
+        type: dword
+
+   - name: "18.9.41.11,CCE-Null | Ensure 'Prevent using Localhost IP address for WebRTC' is set to 'Enabled'"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\MicrosoftEdge\Main
+        name: "HideLocalHostIP"
+        data: "1"
+        type: dword
+
+   - name: "18.9.52.3.2.1,CCE-37708-5 | Ensure 'Restrict Remote Desktop Services users to a single Remote Desktop Services session' is set to 'Enabled'"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windows Nt\Terminal Services
+        name: "fSingleSessionPerUser"
+        data: "1"
+        type: dword
+
+   - name: "18.9.52.3.3.1,CCE-37696-2 | Ensure 'Do not allow COM port redirection' is set to 'Enabled'"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windows Nt\Terminal Services
+        name: "fDisableCcm"
+        data: "1"
+        type: dword
+
+   - name: "18.9.52.3.3.3,CCE-37778-8 | Ensure 'Do not allow LPT port redirection' is set to 'Enabled'"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windows Nt\Terminal Services
+        name: "fDisableLPT"
+        data: "1"
+        type: dword
+
+   - name: "18.9.52.3.3.4,CCE-37477-7 | Ensure 'Do not allow supported Plug and Play device redirection' is set to 'Enabled'"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windows Nt\Terminal Services
+        name: "fDisablePNPRedir"
+        data: "1"
+        type: dword
+
+   - name: "18.9.52.3.10.1,CCE-37562-6 | Ensure 'Set time limit for active but idle Remote Desktop Services sessions' is set to 'Enabled - 15 minutes or less' [GSA-1 hour or less]"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windows Nt\Terminal Services
+        name: "MaxIdleTime"
+        data: "3600000"
+        type: dword
+
+   - name: "18.9.52.3.10.2,CCE-37949-5 | Ensure 'Set time limit for disconnected sessions' is set to 'Enabled - 1 minute' [GSA-8 hours or less]"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windows Nt\Terminal Services
+        name: "MaxDisconnectionTime"
+        data: "28800000"
+        type: dword
+
+   - name: "18.9.59.1,CCE-Null | Ensure 'Turn off KMS Client Online AVS Validation' is set to 'Enabled'"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windows Nt\Currentversion\Software Protection Platform
+        name: "NoGenTicket"
+        data: "1"
+        type: dword
+
+   - name: "18.9.61.1,CCE-Null | Ensure 'Disable all apps from Windows Store' is set to 'Enabled'"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windowsstore
+        name: "DisableStoreApps"
+        data: "0"
+        type: dword
+
+   - name: "18.9.61.4,CCE-38363-8 | Ensure 'Turn off the Store application' is set to 'Enabled'"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windowsstore
+        name: "RemoveWindowsStore"
+        data: "1"
+        type: dword
+
+   - name: "18.9.69.8.1,CCE-36950-4 | Ensure 'Configure Watson events' is set to 'Disabled'"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windows Defender\Reporting
+        name: "DisableGenericRePorts"
+        data: "1"
+        type: dword
+
+   - name: "18.9.73.1,CCE-Null | Ensure 'Allow suggested apps in Windows Ink Workspace' is set to 'Disabled'"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\WindowsInkWorkspace
+        name: "AllowSuggestedAppsInWindowsInkWorkspace"
+        data: "0"
+        type: dword
+
+   - name: "18.9.74.3,CCE-37524-6 | Ensure 'Prevent Internet Explorer security prompt for Windows Installer scripts' is set to 'Disabled'"
+     win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windows\Installer
+        name: "SafeForScripting"
+        data: "0"
+        type: dword
+
+#########
+## EOF ##
+#########
